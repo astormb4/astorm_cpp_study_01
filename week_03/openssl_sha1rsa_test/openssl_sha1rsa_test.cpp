@@ -2,6 +2,17 @@
 //	https://stackoverflow.com/questions/11886262/reading-public-private-key-from-memory-with-openssl
 //	echo "hola" | openssl rsautl -pkcs -sign -inkey key.pem > sign.txt
 
+/*	// VCPKG 관리
+	설치>
+		vcpkg.exe install openssl					// ※ ':x86-windows' 와 동일
+		vcpkg.exe install openssl:x64-windows
+		vcpkg.exe install openssl:x86-windows
+	제거>
+		vcpkg.exe remove openssl					// ※ ':x86-windows' 와 동일
+		vcpkg.exe remove openssl:x64-windows
+		vcpkg.exe remove openssl:x86-windows
+*/
+
 #include "pch.h"
 #include <openssl/sha.h>
 #include <openssl/rsa.h>

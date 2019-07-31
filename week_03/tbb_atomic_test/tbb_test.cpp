@@ -1,5 +1,14 @@
-﻿// tbb_atomic_test.cpp : 이 파일에는 'main' 함수가 포함됩니다. 거기서 프로그램 실행이 시작되고 종료됩니다.
-//
+﻿
+/*	// VCPKG 관리
+	설치>
+		vcpkg.exe install tbb					// ※ ':x86-windows' 와 동일
+		vcpkg.exe install tbb:x64-windows
+		vcpkg.exe install tbb:x86-windows
+	제거>
+		vcpkg.exe remove tbb					// ※ ':x86-windows' 와 동일
+		vcpkg.exe remove tbb:x64-windows
+		vcpkg.exe remove tbb:x86-windows
+*/
 
 #include "pch.h"
 #include <iostream>
