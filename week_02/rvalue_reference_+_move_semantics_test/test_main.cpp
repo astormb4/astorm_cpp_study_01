@@ -31,7 +31,11 @@ public:
 		{
 			m_Data = pRv.m_Data;		// ※ move
 			m_DataLen = pRv.m_DataLen;
-			pRv.Reset();
+			
+			{	// pRv 로부터 객체 정보들이 모두 이동 (move) 한 것이므로, 원본 객체의 정보들은 무효화 시킴 → 이동된 것이므로 원본 정보를 *삭제* 하면 안된다는 점에 유의
+				pRv.m_Data = nullptr;
+				pRv.m_DataLen = 0;
+			}
 		}
 
 		std::cout << "test 1 : move constructor" << std::endl;
@@ -50,13 +54,17 @@ public:
 		return (*this);
 	}
 
-	Test1& operator =(Test1&& pRv)				// 대입 연산자		// C++11
+	Test1& operator =(Test1&& pRv)				// 이동 할당 연산자		// C++11
 	{
 		if (pRv.IsSet() == true)
 		{
 			m_Data = new int[pRv.m_DataLen];
 			m_DataLen = pRv.m_DataLen;
-			pRv.Reset();
+
+			{	// pRv 로부터 객체 정보들이 모두 이동 (move) 한 것이므로, 원본 객체의 정보들은 무효화 시킴 → 이동된 것이므로 원본 정보를 *삭제* 하면 안된다는 점에 유의
+				pRv.m_Data = nullptr;
+				pRv.m_DataLen = 0;
+			}
 		}
 
 		std::cout << "test 1 : move operators" << std::endl;
@@ -108,7 +116,7 @@ int main()
 	aVal1.Set(100);
 
 //	Test1&& aVal2 = aVal1;					// error	// C2440: '초기화 중': 'Test1'에서 'Test1 &&'(으)로 변환할 수 없습니다.		// lvalue를 rvalue 참조에 바인딩할 수 없습니다.
-	Test1&& aVal2 = std::move(aVal1);		// OK		// 이동 생성자
+	Test1&& aVal2 = std::move(aVal1);		// OK		// 이동 생성자가 호출되는 것이 아닌 (단순히) 우측값 참조를 한 것임에 유의	// 해당 경우에는 다음과 동일 → Test1& aVal2 = aVal1;
 
 //	Test1&& aVal3 = aVal2;					// error	// ※ aVal2 자체는 r-value 가 아님 → r-value reference 를 통해 값을 받은 것일 뿐임
 	
